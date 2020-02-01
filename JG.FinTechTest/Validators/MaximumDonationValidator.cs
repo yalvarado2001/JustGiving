@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace JG.FinTechTest.Validators
 {
-    public class MinimumDonationValidator : IValidationRule<decimal>
+    public class MaximumDonationValidator : IValidationRule<decimal>
     {
         public ValidationError Error { get; private set; }
 
         public bool Validates(decimal arg)
         {
-            if(arg < 2m)
+            if (arg > 100000m)
             {
-                this.Error = new ValidationError(1, "Minimum donation amount is £2.00");
+                this.Error = new ValidationError(2, "Maximum donation amount is £100,000.00");
                 return false;
             }
 

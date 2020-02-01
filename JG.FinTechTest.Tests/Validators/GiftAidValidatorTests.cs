@@ -12,16 +12,16 @@ namespace JG.FinTechTest.Tests.Validators
     public class GiftAidValidatorTests
     {        
         private IValidator<decimal> _giftAidValidator;
-        private Mock<IValidatonRule<decimal>> _firstValidationRule;
-        private Mock<IValidatonRule<decimal>> _secondValidationRule;
+        private Mock<IValidationRule<decimal>> _firstValidationRule;
+        private Mock<IValidationRule<decimal>> _secondValidationRule;
 
         [SetUp]
         public void Setup()
         {
-            this._firstValidationRule = new Mock<IValidatonRule<decimal>>();
-            this._secondValidationRule = new Mock<IValidatonRule<decimal>>();
+            this._firstValidationRule = new Mock<IValidationRule<decimal>>();
+            this._secondValidationRule = new Mock<IValidationRule<decimal>>();
 
-            this._giftAidValidator = new GiftAidValidator(new List<IValidatonRule<decimal>>
+            this._giftAidValidator = new GiftAidValidator(new List<IValidationRule<decimal>>
             {
                 this._firstValidationRule.Object,
                 this._secondValidationRule.Object
@@ -58,5 +58,6 @@ namespace JG.FinTechTest.Tests.Validators
             Assert.That(errors.First(), Is.EqualTo(expectedValidationError));
 
         }
+
     }
 }

@@ -7,9 +7,9 @@ namespace JG.FinTechTest.Validators
 {
     public class GiftAidValidator : IValidator<decimal>
     {
-        private readonly List<IValidatonRule<decimal>> _validatonRules;
+        private readonly List<IValidationRule<decimal>> _validatonRules;
 
-        public GiftAidValidator(List<IValidatonRule<decimal>> validatonRules)
+        public GiftAidValidator(List<IValidationRule<decimal>> validatonRules)
         {
             this._validatonRules = validatonRules;
             this.Errors = new List<ValidationError>();

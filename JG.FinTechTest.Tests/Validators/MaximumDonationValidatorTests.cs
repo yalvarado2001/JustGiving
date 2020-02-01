@@ -7,17 +7,18 @@ using System.Text;
 namespace JG.FinTechTest.Tests.Validators
 {
     [TestFixture]
-    public class MinimumDonationValidatorTests
+    class MaximumDonationValidatorTests
     {
-        private static readonly int MinimumValidationErrorCode = 1;
-        private static readonly string MinimumValidationErrorDescription = "Minimum donation amount is £2.00";
+        private static readonly int MinimumValidationErrorCode = 2;
+        private static readonly string MinimumValidationErrorDescription = "Maximum donation amount is £100,000.00";
 
-        [TestCase(10,true)]
-        [TestCase(1.99,false)]
-        [TestCase(2, true)]
-        public void ShouldValidateForAmountsGreaterThanMinimumAndFailOtherwise(decimal donationAmount, bool expectedResult)
+        [TestCase(100000, true)]
+        [TestCase(100000.01, false)]
+        [TestCase(100, true)]
+        [TestCase(100010, false)]
+        public void ShouldValidateForAmountsLessThanMaximumAndFailOtherwise(decimal donationAmount, bool expectedResult)
         {
-            IValidationRule<decimal> validator = new MinimumDonationValidator();
+            IValidationRule<decimal> validator = new MaximumDonationValidator();
 
             bool result = validator.Validates(donationAmount);
 
@@ -27,9 +28,9 @@ namespace JG.FinTechTest.Tests.Validators
         [Test]
         public void ShouldReturnTheExpectedErrorCodeAndDescriptionForFailedValidations()
         {
-            IValidationRule<decimal> validator = new MinimumDonationValidator();
+            IValidationRule<decimal> validator = new MaximumDonationValidator();
 
-            bool result = validator.Validates(1m);
+            bool result = validator.Validates(100000.01m);
 
             Assert.That(result, Is.EqualTo(false));
             Assert.That(validator.Error.ErrorCode, Is.EqualTo(MinimumValidationErrorCode));

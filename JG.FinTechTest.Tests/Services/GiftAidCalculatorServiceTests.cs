@@ -10,7 +10,7 @@ namespace JG.FinTechTest.Tests.Services
     [TestFixture]
     class GiftAidCalculatorServiceTests
     {
-        GiftAidValidator _validator = new GiftAidValidator(new List<IValidatonRule<decimal>>());
+        GiftAidValidator _validator = new GiftAidValidator(new List<IValidationRule<decimal>>());
         IGiftAidCalculatorService _giftAidCalculator;
 
         [SetUp]

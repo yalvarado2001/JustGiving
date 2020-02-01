@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using JG.FinTechTest.Validators;
 
 namespace JG.FinTechTest
 {
@@ -29,6 +30,7 @@ namespace JG.FinTechTest
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             services.AddSingleton<IGiftAidCalculatorService, GiftAidCalculatorService>();
+            services.AddScoped<IValidator<decimal>>(factory => GetGiftAidValidatorInstance());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,15 @@ namespace JG.FinTechTest
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private GiftAidValidator GetGiftAidValidatorInstance()
+        {
+            return new GiftAidValidator(new List<IValidationRule<decimal>>
+            {
+                new MinimumDonationValidator(),
+                new MaximumDonationValidator()
+            });
         }
     }
 }

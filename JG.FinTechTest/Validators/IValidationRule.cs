@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JG.FinTechTest.Validators
 {
-    public interface IValidatonRule<T>
+    public interface IValidationRule<T>
     {
         ValidationError Error { get; }
 
