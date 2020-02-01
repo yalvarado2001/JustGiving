@@ -22,7 +22,7 @@ namespace JG.FinTechTest.Controllers
             this._giftAidValidator = giftAidValidator;
         }
 
-
+        [Route("/")]
         [HttpGet]
         public IActionResult Get([FromQuery(Name ="amount")] decimal amount)
         {
@@ -35,6 +35,17 @@ namespace JG.FinTechTest.Controllers
            });
 
         }
+
+        //[Route("/donor")]
+        //[HttpPost]
+        //public IActionResult Post([FromBody] GiftAidDonorRequest request)
+        //{
+        //    return this.ExecuteAndHandleErrors(() =>
+        //    {
+
+        //    });
+        //}
+
 
         private GiftAidResponse GetGiftAidResponse(decimal amount)
         {
