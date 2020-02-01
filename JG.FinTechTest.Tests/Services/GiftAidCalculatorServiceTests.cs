@@ -1,4 +1,5 @@
 ﻿using JG.FinTechTest.Services;
+using JG.FinTechTest.Validators;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,15 @@ namespace JG.FinTechTest.Tests.Services
     [TestFixture]
     class GiftAidCalculatorServiceTests
     {
-        IGiftAidCalculatorService _giftAidCalculator = new GiftAidCalculatorService();
+        GiftAidValidator _validator = new GiftAidValidator(new List<IValidatonRule<decimal>>());
+        IGiftAidCalculatorService _giftAidCalculator;
+
+        [SetUp]
+        public void Setup()
+        {
+            this._giftAidCalculator = new GiftAidCalculatorService();
+        }
+
 
         [TestCase(100, 25)]
         [TestCase(111, 27.75)]

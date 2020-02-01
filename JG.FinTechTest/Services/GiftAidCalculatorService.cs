@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JG.FinTechTest.Validators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +13,12 @@ namespace JG.FinTechTest.Services
 
     public class GiftAidCalculatorService : IGiftAidCalculatorService
     {
-        private const decimal BASIC_TAX_RATE = 20m;
+        private static readonly decimal BasicTaxRate = 20m;
+
         private readonly decimal _taxRate;
         private readonly decimal _giftAidRate;
 
-        public GiftAidCalculatorService():this(BASIC_TAX_RATE)
+        public GiftAidCalculatorService() :this(BasicTaxRate)
         {}
 
         public GiftAidCalculatorService(decimal taxRate)
