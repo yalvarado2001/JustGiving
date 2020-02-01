@@ -21,6 +21,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GiftAidResponse'
+        '400':
+          description: BadRequest
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/ValidationError'
+        '500':
+            description: InternalServerError
 definitions:
   GiftAidResponse:
     type: object
@@ -32,3 +40,13 @@ definitions:
         type: number
       giftAidAmount: 
         type: number
+  ValidationError:
+    type: object
+    required:
+        - errorCode
+        - errorDescription
+    properties:
+      errorCode:
+        type: number
+      errorDescription:
+        type: string
