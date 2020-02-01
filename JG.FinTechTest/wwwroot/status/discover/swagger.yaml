@@ -29,6 +29,34 @@ paths:
               $ref: '#/definitions/ValidationError'
         '500':
             description: InternalServerError
+  /giftaid/donor:
+    post:
+      summary: Takes donor details and returns donor details with a declarationId and the calculated Gift Aid.
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: GiftAidDonorRequest
+        description: object containing the donor's basic details
+        schema:
+          $ref: '#/definitions/GiftAidDonorRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GiftAidDonorResponse'
+        '400':
+          description: BadRequest
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/ValidationError'
+        '500':
+            description: InternalServerError
+
+
 definitions:
   GiftAidResponse:
     type: object
@@ -50,3 +78,35 @@ definitions:
         type: number
       errorDescription:
         type: string
+  GiftAidDonorRequest:
+    type: object
+    required:
+      - donationAmount
+      - name
+      - postcode
+    properties:
+      donationAmount:
+        type: number
+      name:
+        type: string
+      postcode:
+        type: string
+  GiftAidDonorResponse:
+    type: object
+    required:
+      - donationAmount
+      - name
+      - postcode
+      - giftAidAmount
+      - declarationId
+    properties:
+      donationAmount:
+        type: number
+      name:
+        type: string
+      postcode:
+        type: string
+      giftAidAmount:
+        type: number
+      declarationId:
+        type: number
