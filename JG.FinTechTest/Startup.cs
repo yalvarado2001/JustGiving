@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using JG.FinTechTest.Validators;
+using JG.FinTechTest.Repositories;
 
 namespace JG.FinTechTest
 {
@@ -31,6 +32,8 @@ namespace JG.FinTechTest
             
             services.AddSingleton<IGiftAidCalculatorService, GiftAidCalculatorService>();
             services.AddScoped<IValidator<decimal>>(factory => GetGiftAidValidatorInstance());
+            services.AddScoped<IGiftAidDonorService, GiftAidDonorService>();
+            services.AddSingleton<IGiftAidDonorRepository, GiftAidDonorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
