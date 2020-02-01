@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JG.FinTechTest.Models;
+using JG.FinTechTest.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JG.FinTechTest.Controllers
@@ -10,11 +12,25 @@ namespace JG.FinTechTest.Controllers
     [ApiController]
     public class GiftAidController : ControllerBase
     {
+        private readonly IGiftAidCalculatorService _giftAidCalculatorService;
+
+        public GiftAidController(IGiftAidCalculatorService giftAidCalculatorService)
+        {
+            this._giftAidCalculatorService = giftAidCalculatorService;
+        }
+
+
 
         [HttpGet]
-        public IActionResult Test()
+        public IActionResult Get([FromQuery(Name ="amount")] decimal amount)
         {
-            return Ok("Hello World");
+            decimal calculatedGiftAid = this._giftAidCalculatorService.Calculate(amount);
+
+            return Ok(new GiftAidResponse
+            {
+                DonationAmount = amount,
+                GiftAidAmount = calculatedGiftAid
+            });
         }
     }
 }
